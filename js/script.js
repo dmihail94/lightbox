@@ -28,8 +28,6 @@ var leftA = $('.leftA');
 //right Arrow
 var rightA = $('.rightA');
 
-//value of index in global scope is undefined
-
 //iterate throught all thumbs from the DOM
 for (let i = 0; i < lenThumbs; i++) {
 
