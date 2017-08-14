@@ -29,14 +29,14 @@ var leftA = $('.leftA');
 var rightA = $('.rightA');
 
 //value of index in global scope is undefined
-let index;
+
 //iterate throught all thumbs from the DOM
 for (let i = 0; i < lenThumbs; i++) {
 
   //When the i`th thumb is clicked display the i`th overlay
   $(thumbs[i]).click(function() {
     //the value of index become the index of the thumb clicked
-    index = i;
+    let index = i;
     //set the src for the image from overlay
     $(overlay).find('img').attr('src', 'photos/' + img[i] + '.jpg');
 
@@ -48,37 +48,55 @@ for (let i = 0; i < lenThumbs; i++) {
     $(overlay).show('fast');
 
     //event for left arrow
-    $(leftA).click(function(event) {
-      event.preventDefault();
-      return prev();
-    });
+    $(leftA).click(prev);
+
     //event for right arrow
-    $(rightA).click(function(event) {
-      event.preventDefault();
-      return next();
-    });
+    $(rightA).click(next);
     //Mobile swipe left
-    $(overlay).on('swipeleft', function(event) {
-      event.preventDefault();
-      return prev();
-    });
+    $(overlay).on('swipeleft', prev);
     //Mobile swipe right
-    $(overlay).on('swiperight', function(event) {
-      event.preventDefault();
-      return next();
-    });
+    $(overlay).on('swiperight', next);
+
+
+    //next overlay
+    function next() {
+
+      //when right arrow is clicked and if the last overlay is displayed then the next item showed become the first overlay
+      if (index >= lenThumbs - 1) {
+        index = 0;
+      } else {
+        index++;
+      }
+
+      $(overlay).find('img').attr('src', 'photos/' + img[index] + '.jpg');
+      $(overlay).find('.maincaption').html(mainCaption[index]);
+      //set the text for second caption
+      $(overlay).find('.secondcaption').html(secondCaption[index]);
+    }
+
+    //previous overlay
+    function prev() {
+
+      //when left arrow is clicked and if the first overlay is displayed then the previous item showed become the last overlay
+      if (index <= 0) {
+        index = lenThumbs - 1;
+      } else {
+        index--;
+      }
+
+      $(overlay).find('img').attr('src', 'photos/' + img[index] + '.jpg');
+      $(overlay).find('.maincaption').html(mainCaption[index]);
+      $(overlay).find('.secondcaption').html(secondCaption[index]);
+    }
 
   }); //end event thumb clicked
 
-
-  //When the img from the overlay is clicked, hide the overlay
-  $(overlay).children('img').click(function() {
-    $(overlay).hide('fast');
-  });
-
 } //end for
 
-
+//When the img from the overlay is clicked, hide the overlay
+$(overlay).children('img').click(function() {
+  $(overlay).hide('fast');
+});
 
 function search() {
 
@@ -105,34 +123,3 @@ $(document).ready(function() {
   $('.search').val('');
 
 });
-
-//next overlay
-function next() {
-
-  //when right arrow is clicked and if the last overlay is displayed then the next item showed become the first overlay
-  if (index >= lenThumbs - 1) {
-    index = 0;
-  } else {
-    index++;
-  }
-
-  $(overlay).find('img').attr('src', 'photos/' + img[index] + '.jpg');
-  $(overlay).find('.maincaption').html(mainCaption[index]);
-  //set the text for second caption
-  $(overlay).find('.secondcaption').html(secondCaption[index]);
-}
-
-//previous overlay
-function prev() {
-
-  //when left arrow is clicked and if the first overlay is displayed then the previous item showed become the last overlay
-  if (index <= 0) {
-    index = lenThumbs - 1;
-  } else {
-    index--;
-  }
-
-  $(overlay).find('img').attr('src', 'photos/' + img[index] + '.jpg');
-  $(overlay).find('.maincaption').html(mainCaption[index]);
-  $(overlay).find('.secondcaption').html(secondCaption[index]);
-}
