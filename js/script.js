@@ -36,7 +36,7 @@ for (let i = 0; i < lenThumbs; i++) {
     //the value of index become the index of the thumb clicked
     let index = i;
     //set the src for the image from overlay
-    $(overlay).find('img').attr('src', 'photos/' + img[i] + '.jpg');
+    $(overlay).find('img').attr('src', 'photos/photos/' + img[i] + '.jpg');
 
     //set the text for main caption
     $(overlay).find('.maincaption').html(mainCaption[i]);
@@ -66,7 +66,7 @@ for (let i = 0; i < lenThumbs; i++) {
         index++;
       }
 
-      $(overlay).find('img').attr('src', 'photos/' + img[index] + '.jpg');
+      $(overlay).find('img').attr('src', 'photos/photos/' + img[index] + '.jpg');
       $(overlay).find('.maincaption').html(mainCaption[index]);
       //set the text for second caption
       $(overlay).find('.secondcaption').html(secondCaption[index]);
@@ -82,7 +82,7 @@ for (let i = 0; i < lenThumbs; i++) {
         index--;
       }
 
-      $(overlay).find('img').attr('src', 'photos/' + img[index] + '.jpg');
+      $(overlay).find('img').attr('src', 'photos/photos/' + img[index] + '.jpg');
       $(overlay).find('.maincaption').html(mainCaption[index]);
       $(overlay).find('.secondcaption').html(secondCaption[index]);
     }
